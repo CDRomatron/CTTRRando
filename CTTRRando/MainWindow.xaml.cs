@@ -99,11 +99,20 @@ namespace CTTRRando
             hubs.Add("solar");
         }
 
-
-        private byte[] ReplaceInstances(string path, List<string> replaceWith, List<string> replacing, string before, string after)
+        private void PopulateHubLines(List<string> hublines)
         {
-            string[] generic = File.ReadAllLines(path);
-            byte[] input = File.ReadAllBytes(path);
+            hublines.Add("this.AddAction_ChangeLevel(\"onfoot_adventure\",\"StartLocationFromMidway\")");
+            hublines.Add("this.AddAction_ChangeLevel(\"onfoot_fairy\",\"StartLocationFromMidway\")");
+            hublines.Add("this.AddAction_ChangeLevel(\"onfoot_dino\",\"StartLocationFromMidway\")");
+            hublines.Add("this.AddAction_ChangeLevel(\"onfoot_egypt\",\"StartLocationFromMidway\")");
+            hublines.Add("this.AddAction_ChangeLevel(\"onfoot_solar\",\"StartLocationFromMidway\")");
+        }
+
+
+        private byte[] ReplaceInstances(ObjectiveFile file, List<string> replaceWith, List<string> replacing, string before, string after)
+        {
+            string[] generic = file.contentString;
+            byte[] input = file.contentByte;
 
             string output = "";
 
@@ -130,16 +139,19 @@ namespace CTTRRando
 
             if(newgeneric.Length > input.Length)
             {
-                Console.WriteLine(path + " became larger " + Convert.ToString(newgeneric.Length-input.Length));
+                Console.WriteLine(file.path + " became larger " + Convert.ToString(newgeneric.Length-input.Length));
             }
             else if(newgeneric.Length == input.Length)
             {
-                Console.WriteLine(path + " did not change " + Convert.ToString(newgeneric.Length - input.Length));
+                Console.WriteLine(file.path + " did not change " + Convert.ToString(newgeneric.Length - input.Length));
             }
             else
             {
-                Console.WriteLine(path + " became smaller " + Convert.ToString(newgeneric.Length - input.Length));
+                Console.WriteLine(file.path + " became smaller " + Convert.ToString(newgeneric.Length - input.Length));
             }
+
+            file.contentByte = newgeneric;
+            file.reload(file.path + ".new");
 
             return newgeneric;
 
@@ -156,9 +168,25 @@ namespace CTTRRando
 
             foreach(ObjectiveFile file in files)
             {
-                ReplaceRCF("common.rcf", file.start, ReplaceInstances(file.path, courses, courselines, "this.AddAction_UnlockRace(\"", "\")"), file.length); 
+                ReplaceRCF("common.rcf", file.start, ReplaceInstances(file, courses, courselines, "this.AddAction_UnlockRace(\"", "\")"), file.length); 
             }
             
+        }
+
+        private void ShuffleHubs(List<ObjectiveFile> files)
+        {
+            List<string> hubs = new List<string>();
+            PopulateHubs(hubs);
+            hubs.Shuffle();
+
+            List<string> hublines = new List<string>();
+            PopulateHubLines(hublines);
+
+            foreach (ObjectiveFile file in files)
+            {
+                ReplaceRCF("common.rcf", file.start, ReplaceInstances(file, hubs, hublines, "this.AddAction_ChangeLevel(\"onfoot_", "\",\"StartLocationFromMidway\")"), file.length);
+            }
+
         }
 
         private void Button1_Click(object sender, RoutedEventArgs e)
@@ -171,13 +199,16 @@ namespace CTTRRando
             files.Add(new ObjectiveFile("missionobjectives_fairy.god", Convert.ToInt32(0x62800), Convert.ToInt32(0x6800)));
             files.Add(new ObjectiveFile("missionobjectives_midway.god", Convert.ToInt32(0x69000), Convert.ToInt32(0x16800)));
             files.Add(new ObjectiveFile("missionobjectives_solar.god", Convert.ToInt32(0x7F800), Convert.ToInt32(0x7800)));
-            /*List<string> hubs = new List<string>();
-            PopulateHubs(hubs);
-
-            hubs.Shuffle();*/
 
             ShuffleCourses(files);
-            Console.WriteLine("");
+            ShuffleHubs(files);
+
+            string[] delete = Directory.GetFiles(Directory.GetCurrentDirectory(), "*.new");
+
+            foreach (string file in delete)
+            {
+                File.Delete(file);
+            }
         }
     }
 
