@@ -27,6 +27,31 @@ namespace CTTRRando
             InitializeComponent();
         }
 
+        public static void ReplaceRCF(string filename, long position, byte[] data, int length)
+        {
+
+            byte[] output = new byte[length];
+
+            for(int i=0;i<length;i++)
+            {
+                if (i < data.Length)
+                {
+                    output[i] = data[i];
+                }
+                else
+                {
+                    output[i] = 0x0;
+                }
+            }
+
+            using (Stream stream = File.Open(filename, FileMode.Open))
+            {
+                stream.Position = position;
+                stream.Write(output, 0, length);
+
+            }
+        }
+
         private void PopulateCourses(List<string> courses)
         {
             courses.Add("adventure1");
@@ -74,38 +99,84 @@ namespace CTTRRando
             hubs.Add("solar");
         }
 
-        private void Button1_Click(object sender, RoutedEventArgs e)
+
+        private byte[] ReplaceInstances(string path, List<string> replaceWith, List<string> replacing, string before, string after)
         {
-            List<string> courses = new List<string>();
-            PopulateCourses(courses);
+            string[] generic = File.ReadAllLines(path);
+            byte[] input = File.ReadAllBytes(path);
 
-            List<string> courselines = new List<string>();
-            PopulateCourseLines(courselines);
+            string output = "";
 
-
-            List<string> hubs = new List<string>();
-            PopulateHubs(hubs);
-
-            courses.Shuffle();
-            hubs.Shuffle();
-
-            string[] generic = File.ReadAllLines("C:\\Users\\short\\OneDrive\\Documents\\CTTR2\\genericobjectives.god");
-
-            for(int i=0; i<generic.Length; i++)
+            for (int i = 0; i < generic.Length; i++)
             {
                 bool flag = true;
-                for(int j=0;j<courselines.Count;j++)
+                for (int j = 0; j < replacing.Count; j++)
                 {
-     
-                    if(generic[i] == courselines[j] && flag)
+
+                    if (generic[i] == replacing[j] && flag)
                     {
-                        generic[i] = "this.AddAction_UnlockRace(\"" + courses[j] + "\")";
+                        generic[i] = before + replaceWith[j] + after;
                         flag = false;
                     }
                 }
 
-                Console.WriteLine(generic[i]);
+                if (i < generic.Length)
+                {
+                    output = output + generic[i] + '\n';
+                }
             }
+
+            byte[] newgeneric = Encoding.UTF8.GetBytes(output);
+
+            if(newgeneric.Length > input.Length)
+            {
+                Console.WriteLine(path + " became larger " + Convert.ToString(newgeneric.Length-input.Length));
+            }
+            else if(newgeneric.Length == input.Length)
+            {
+                Console.WriteLine(path + " did not change " + Convert.ToString(newgeneric.Length - input.Length));
+            }
+            else
+            {
+                Console.WriteLine(path + " became smaller " + Convert.ToString(newgeneric.Length - input.Length));
+            }
+
+            return newgeneric;
+
+        }
+
+        private void ShuffleCourses(List<ObjectiveFile> files)
+        {
+            List<string> courses = new List<string>();
+            PopulateCourses(courses);
+            courses.Shuffle();
+
+            List<string> courselines = new List<string>();
+            PopulateCourseLines(courselines);
+
+            foreach(ObjectiveFile file in files)
+            {
+                ReplaceRCF("common.rcf", file.start, ReplaceInstances(file.path, courses, courselines, "this.AddAction_UnlockRace(\"", "\")"), file.length); 
+            }
+            
+        }
+
+        private void Button1_Click(object sender, RoutedEventArgs e)
+        {
+            List<ObjectiveFile> files = new List<ObjectiveFile>();
+            files.Add(new ObjectiveFile("genericobjectives.god", Convert.ToInt32(0x48800), Convert.ToInt32(0x5800)));
+            files.Add(new ObjectiveFile("missionobjectives_adventure.god", Convert.ToInt32(0x4E000), Convert.ToInt32(0x7000)));
+            files.Add(new ObjectiveFile("missionobjectives_dino.god", Convert.ToInt32(0x55000), Convert.ToInt32(0x7000)));
+            files.Add(new ObjectiveFile("missionobjectives_egypt.god", Convert.ToInt32(0x5C000), Convert.ToInt32(0x6800)));
+            files.Add(new ObjectiveFile("missionobjectives_fairy.god", Convert.ToInt32(0x62800), Convert.ToInt32(0x6800)));
+            files.Add(new ObjectiveFile("missionobjectives_midway.god", Convert.ToInt32(0x69000), Convert.ToInt32(0x16800)));
+            files.Add(new ObjectiveFile("missionobjectives_solar.god", Convert.ToInt32(0x7F800), Convert.ToInt32(0x7800)));
+            /*List<string> hubs = new List<string>();
+            PopulateHubs(hubs);
+
+            hubs.Shuffle();*/
+
+            ShuffleCourses(files);
             Console.WriteLine("");
         }
     }
