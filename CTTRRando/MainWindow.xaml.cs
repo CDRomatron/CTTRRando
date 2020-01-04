@@ -52,26 +52,7 @@ namespace CTTRRando
             }
         }
 
-        private void PopulateCourses(List<string> courses)
-        {
-            courses.Add("adventure1");
-            courses.Add("adventure2");
-            courses.Add("adventure3");
-            courses.Add("fairy1");
-            courses.Add("fairy2");
-            courses.Add("fairy3");
-            courses.Add("dino1");
-            courses.Add("dino2");
-            courses.Add("dino3");
-            courses.Add("egypt1");
-            courses.Add("egypt2");
-            courses.Add("egypt3");
-            courses.Add("solar1");
-            courses.Add("solar2");
-            courses.Add("solar3");
-        }
-
-        private void PopulateCourseLines(List<string> courselines)
+        private void PopulateCourses(List<string> courselines)
         {
             courselines.Add("this.AddAction_UnlockRace(\"adventure1\")");
             courselines.Add("this.AddAction_UnlockRace(\"adventure2\")");
@@ -90,16 +71,7 @@ namespace CTTRRando
             courselines.Add("this.AddAction_UnlockRace(\"solar3\")");
         }
 
-        private void PopulateHubs(List<string> hubs)
-        {
-            hubs.Add("adventure");
-            hubs.Add("fairy");
-            hubs.Add("dino");
-            hubs.Add("egypt");
-            hubs.Add("solar");
-        }
-
-        private void PopulateHubLines(List<string> hublines)
+        private void PopulateHubs(List<string> hublines)
         {
             hublines.Add("this.AddAction_ChangeLevel(\"onfoot_adventure\",\"StartLocationFromMidway\")");
             hublines.Add("this.AddAction_ChangeLevel(\"onfoot_fairy\",\"StartLocationFromMidway\")");
@@ -108,8 +80,20 @@ namespace CTTRRando
             hublines.Add("this.AddAction_ChangeLevel(\"onfoot_solar\",\"StartLocationFromMidway\")");
         }
 
+        private void PopulateMinigames(List<string> minigameslines)
+        {
+            minigameslines.Add("this.AddAction_UnlockMiniGame(\"OFMiniGames/MiniGameBowling1\")");
+            minigameslines.Add("this.AddAction_UnlockMiniGame(\"OFMiniGames/MiniGameDucks1\")");
+            minigameslines.Add("this.AddAction_UnlockMiniGame(\"OFMiniGames/MiniGameSkeets1\")");
+            minigameslines.Add("this.AddAction_UnlockMiniGame(\"OFMiniGames/MiniGameFallingTargets1\")");
+            minigameslines.Add("this.AddAction_UnlockMiniGame(\"OFMiniGames/MiniGameFloatingTargets1\")");
+            minigameslines.Add("this.AddAction_UnlockMiniGame(\"OFMiniGames/MiniGameFallingTargets2\")");
+            minigameslines.Add("this.AddAction_UnlockMiniGame(\"OFMiniGames/MiniGameBowling2\")");
+            minigameslines.Add("this.AddAction_UnlockMiniGame(\"OFMiniGames/MiniGameFloatingTargets2\")");
+        }
 
-        private byte[] ReplaceInstances(ObjectiveFile file, List<string> replaceWith, List<string> replacing, string before, string after)
+
+        private byte[] ReplaceInstances(ObjectiveFile file, List<string> replaceWith, List<string> replacing)
         {
             string[] generic = file.contentString;
             byte[] input = file.contentByte;
@@ -124,7 +108,7 @@ namespace CTTRRando
 
                     if (generic[i] == replacing[j] && flag)
                     {
-                        generic[i] = before + replaceWith[j] + after;
+                        generic[i] = replaceWith[j];
                         flag = false;
                     }
                 }
@@ -164,11 +148,11 @@ namespace CTTRRando
             courses.Shuffle();
 
             List<string> courselines = new List<string>();
-            PopulateCourseLines(courselines);
+            PopulateCourses(courselines);
 
             foreach(ObjectiveFile file in files)
             {
-                ReplaceRCF("common.rcf", file.start, ReplaceInstances(file, courses, courselines, "this.AddAction_UnlockRace(\"", "\")"), file.length); 
+                ReplaceRCF("common.rcf", file.start, ReplaceInstances(file, courses, courselines), file.length); 
             }
             
         }
@@ -180,11 +164,27 @@ namespace CTTRRando
             hubs.Shuffle();
 
             List<string> hublines = new List<string>();
-            PopulateHubLines(hublines);
+            PopulateHubs(hublines);
 
             foreach (ObjectiveFile file in files)
             {
-                ReplaceRCF("common.rcf", file.start, ReplaceInstances(file, hubs, hublines, "this.AddAction_ChangeLevel(\"onfoot_", "\",\"StartLocationFromMidway\")"), file.length);
+                ReplaceRCF("common.rcf", file.start, ReplaceInstances(file, hubs, hublines), file.length);
+            }
+
+        }
+
+        private void ShuffleMinigames(List<ObjectiveFile> files)
+        {
+            List<string> minigames = new List<string>();
+            PopulateMinigames(minigames);
+            minigames.Shuffle();
+
+            List<string> minigamelines = new List<string>();
+            PopulateMinigames(minigamelines);
+
+            foreach (ObjectiveFile file in files)
+            {
+                ReplaceRCF("common.rcf", file.start, ReplaceInstances(file, minigames, minigamelines), file.length);
             }
 
         }
@@ -202,6 +202,7 @@ namespace CTTRRando
 
             ShuffleCourses(files);
             ShuffleHubs(files);
+            ShuffleMinigames(files);
 
             string[] delete = Directory.GetFiles(Directory.GetCurrentDirectory(), "*.new");
 
