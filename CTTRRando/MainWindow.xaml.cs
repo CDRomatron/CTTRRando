@@ -92,7 +92,34 @@ namespace CTTRRando
             minigameslines.Add("this.AddAction_UnlockMiniGame(\"OFMiniGames/MiniGameFloatingTargets2\")");
         }
 
-
+        private void PopulateUnlocks(List<string> unlocklines)
+        {
+            unlocklines.Add("this.AddAction_UnlockCar(\"crash\",1)");
+            unlocklines.Add("this.AddAction_UnlockCar(\"neocortex\",1)");
+            unlocklines.Add("this.AddAction_UnlockCar(\"pasadena\",1)");
+            unlocklines.Add("this.AddAction_UnlockCar(\"ngin\",1)");
+            unlocklines.Add("this.AddAction_UnlockCar(\"coco\",1)");
+            unlocklines.Add("this.AddAction_UnlockCar(\"crunch\",1)");
+            unlocklines.Add("this.AddAction_UnlockCar(\"nina\",1)");
+            unlocklines.Add("this.AddAction_UnlockCar(\"vonclutch\",1)");
+            unlocklines.Add("this.AddAction_UnlockCar(\"crash\",2)");
+            unlocklines.Add("this.AddAction_UnlockCar(\"coco\",2)");
+            unlocklines.Add("this.AddAction_UnlockCar(\"pasadena\",2)");
+            unlocklines.Add("this.AddAction_UnlockCar(\"ngin\",2)");
+            unlocklines.Add("this.AddAction_UnlockCar(\"nina\",2)");
+            unlocklines.Add("this.AddAction_UnlockCar(\"crunch\",2)");
+            unlocklines.Add("this.AddAction_UnlockCar(\"vonclutch\",2)");
+            unlocklines.Add("this.AddAction_UnlockCar(\"neocortex\",2)");
+            unlocklines.Add("this.AddAction_UnlockCar(\"crash\",3)");
+            unlocklines.Add("this.AddAction_UnlockCar(\"coco\",3)");
+            unlocklines.Add("this.AddAction_UnlockCar(\"crunch\",3)");
+            unlocklines.Add("this.AddAction_UnlockCar(\"pasadena\",3)");
+            unlocklines.Add("this.AddAction_UnlockCar(\"vonclutch\",3)");
+            unlocklines.Add("this.AddAction_UnlockCar(\"nina\",3)");
+            unlocklines.Add("this.AddAction_UnlockCar(\"neocortex\",3)");
+            unlocklines.Add("this.AddAction_UnlockCar(\"ngin\",3)");
+        }
+        
         private byte[] ReplaceInstances(ObjectiveFile file, List<string> replaceWith, List<string> replacing)
         {
             string[] generic = file.contentString;
@@ -182,9 +209,32 @@ namespace CTTRRando
             List<string> minigamelines = new List<string>();
             PopulateMinigames(minigamelines);
 
+            
+
             foreach (ObjectiveFile file in files)
             {
                 ReplaceRCF("common.rcf", file.start, ReplaceInstances(file, minigames, minigamelines), file.length);
+            }
+
+        }
+
+        private void ShuffleUnlocks(List<ObjectiveFile> files)
+        {
+            List<string> unlocks = new List<string>();
+            PopulateUnlocks(unlocks);
+            unlocks.Shuffle();
+
+            List<string> unlocklines = new List<string>();
+            PopulateUnlocks(unlocklines);
+
+            while (unlocks[0].Length + unlocks[1].Length != unlocklines[0].Length + unlocklines[1].Length)
+            {
+                unlocks.Shuffle();
+            }
+
+            foreach (ObjectiveFile file in files)
+            {
+                ReplaceRCF("common.rcf", file.start, ReplaceInstances(file, unlocks, unlocklines), file.length);
             }
 
         }
@@ -203,6 +253,7 @@ namespace CTTRRando
             ShuffleCourses(files);
             ShuffleHubs(files);
             ShuffleMinigames(files);
+            ShuffleUnlocks(files);
 
             string[] delete = Directory.GetFiles(Directory.GetCurrentDirectory(), "*.new");
 
