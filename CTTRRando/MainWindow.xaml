@@ -5,10 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CTTRRando"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="429.155" Width="254.36">
     <Grid>
 
-        <Button x:Name="button1" Content="Button" HorizontalAlignment="Left" Margin="122,225,0,0" VerticalAlignment="Top" Width="75" Click="Button1_Click"/>
+        <Button x:Name="button1" Content="Randomise" HorizontalAlignment="Left" Margin="38,119,0,0" VerticalAlignment="Top" Width="75" Click="Button1_Click"/>
+        <CheckBox x:Name="checkBox" Content="Tracks" HorizontalAlignment="Left" Margin="29,19,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="checkBox1" Content="Hubs" HorizontalAlignment="Left" Margin="29,39,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="checkBox2" Content="Unlocks" HorizontalAlignment="Left" Margin="29,59,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="checkBox3" Content="NPC Coords" HorizontalAlignment="Left" Margin="29,79,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="checkBox4" Content="Minigames" HorizontalAlignment="Left" Margin="29,99,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

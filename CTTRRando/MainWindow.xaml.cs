@@ -537,34 +537,53 @@ namespace CTTRRando
             files.Add(new ObjectiveFile("missionobjectives_midway.god", Convert.ToInt32(0x69000), Convert.ToInt32(0x16800)));
             files.Add(new ObjectiveFile("missionobjectives_solar.god", Convert.ToInt32(0x7F800), Convert.ToInt32(0x7800)));
 
-            ShuffleCourses(files);
-            ShuffleHubs(files);
-            ShuffleMinigames(files);
-            ShuffleUnlocks(files);
+            if(checkBox.IsChecked == true)
+            {
+                ShuffleCourses(files);
+            }
 
-            List<ObjectiveFile> hub0 = new List<ObjectiveFile>();
-            hub0.Add(new ObjectiveFile("NPC0.god", Convert.ToInt32(0x413000), Convert.ToInt32(0x1800)));
-            ShuffleNPCCoords(hub0, "");
+            if(checkBox1.IsChecked == true)
+            {
+                ShuffleHubs(files);
 
-            List<ObjectiveFile> hub1 = new List<ObjectiveFile>();
-            hub1.Add(new ObjectiveFile("NPC1.god", Convert.ToInt32(0x4D0800), Convert.ToInt32(0x2800)));
-            ShuffleNPCCoords(hub1, "1");
+            }
 
-            List<ObjectiveFile> hub2 = new List<ObjectiveFile>();
-            hub2.Add(new ObjectiveFile("NPC2.god", Convert.ToInt32(0x4C3800), Convert.ToInt32(0x2800)));
-            ShuffleNPCCoords(hub2, "2");
+            if(checkBox2.IsChecked == true)
+            {
+                ShuffleUnlocks(files);
+            }
 
-            List<ObjectiveFile> hub3 = new List<ObjectiveFile>();
-            hub3.Add(new ObjectiveFile("NPC3.god", Convert.ToInt32(0x4B5800), Convert.ToInt32(0x1800)));
-            ShuffleNPCCoords(hub3, "3");
+            if(checkBox3.IsChecked == true)
+            {
+                List<ObjectiveFile> hub0 = new List<ObjectiveFile>();
+                hub0.Add(new ObjectiveFile("NPC0.god", Convert.ToInt32(0x413000), Convert.ToInt32(0x1800)));
+                ShuffleNPCCoords(hub0, "");
 
-            List<ObjectiveFile> hub5 = new List<ObjectiveFile>();
-            hub5.Add(new ObjectiveFile("NPC5.god", Convert.ToInt32(0x4EC000), Convert.ToInt32(0x3000)));
-            ShuffleNPCCoords(hub5, "5");
+                List<ObjectiveFile> hub1 = new List<ObjectiveFile>();
+                hub1.Add(new ObjectiveFile("NPC1.god", Convert.ToInt32(0x4D0800), Convert.ToInt32(0x2800)));
+                ShuffleNPCCoords(hub1, "1");
 
-            List<ObjectiveFile> hub6 = new List<ObjectiveFile>();
-            hub6.Add(new ObjectiveFile("NPC6.god", Convert.ToInt32(0x390000), Convert.ToInt32(0x2800)));
-            ShuffleNPCCoords(hub6, "6");
+                List<ObjectiveFile> hub2 = new List<ObjectiveFile>();
+                hub2.Add(new ObjectiveFile("NPC2.god", Convert.ToInt32(0x4C3800), Convert.ToInt32(0x2800)));
+                ShuffleNPCCoords(hub2, "2");
+
+                List<ObjectiveFile> hub3 = new List<ObjectiveFile>();
+                hub3.Add(new ObjectiveFile("NPC3.god", Convert.ToInt32(0x4B5800), Convert.ToInt32(0x1800)));
+                ShuffleNPCCoords(hub3, "3");
+
+                List<ObjectiveFile> hub5 = new List<ObjectiveFile>();
+                hub5.Add(new ObjectiveFile("NPC5.god", Convert.ToInt32(0x4EC000), Convert.ToInt32(0x3000)));
+                ShuffleNPCCoords(hub5, "5");
+
+                List<ObjectiveFile> hub6 = new List<ObjectiveFile>();
+                hub6.Add(new ObjectiveFile("NPC6.god", Convert.ToInt32(0x390000), Convert.ToInt32(0x2800)));
+                ShuffleNPCCoords(hub6, "6");
+            }
+
+            if(checkBox4.IsChecked == true)
+            {
+                ShuffleMinigames(files);
+            }
 
             string[] delete = Directory.GetFiles(Directory.GetCurrentDirectory(), "*.new");
 
