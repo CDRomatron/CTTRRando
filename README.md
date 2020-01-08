@@ -1,7 +1,7 @@
 # CTTRRando
 A Crash Tag Team Racing Randomiser
 
-This software randomises many elements of Crash Tag Team Racing. It is currently only compatible with the Gamecube NTSC release. 
+This software randomises many elements of Crash Tag Team Racing. It is currently only compatible with the Gamecube NTSC release. The produced iso can be played on either Dolphin or a Wii. 
 
 To run this softare:
 * Extract CTTRRando.exe into a folder.
@@ -27,3 +27,4 @@ Planned features:
 * Movie shuffling
 * SFX shuffling
 * Music shuffling
+* Support for additional platforms/regions
