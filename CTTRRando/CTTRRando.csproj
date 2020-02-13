@@ -55,6 +55,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Elements\Courses.cs" />
+    <Compile Include="Elements\Hubs.cs" />
+    <Compile Include="Elements\Minigames.cs" />
+    <Compile Include="Elements\NPCCoords0.cs" />
+    <Compile Include="Elements\NPCCoords1.cs" />
+    <Compile Include="Elements\NPCCoords2.cs" />
+    <Compile Include="Elements\NPCCoords3.cs" />
+    <Compile Include="Elements\NPCCoords5.cs" />
+    <Compile Include="Elements\NPCCoords6.cs" />
+    <Compile Include="Elements\Files.cs" />
+    <Compile Include="Elements\Unlocks.cs" />
+    <Compile Include="RCFFile.cs" />
+    <Compile Include="Replacer.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -63,13 +76,15 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ISO\ISOExtractor.cs" />
+    <Compile Include="ISO\ISOWriter.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ObjectiveFile.cs" />
+    <Compile Include="GODFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

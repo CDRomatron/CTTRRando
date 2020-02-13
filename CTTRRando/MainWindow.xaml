@@ -8,14 +8,14 @@
         Title="MainWindow" Height="429.155" Width="254.36">
     <Grid>
 
-        <Button x:Name="button1" Content="Randomise" HorizontalAlignment="Left" Margin="38,119,0,0" VerticalAlignment="Top" Width="75" Click="Button1_Click"/>
-        <CheckBox x:Name="checkBox" Content="Tracks" HorizontalAlignment="Left" Margin="29,19,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="checkBox1" Content="Hubs" HorizontalAlignment="Left" Margin="29,39,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="checkBox2" Content="Unlocks" HorizontalAlignment="Left" Margin="29,59,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="checkBox3" Content="NPC Coords" HorizontalAlignment="Left" Margin="29,79,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="checkBox4" Content="Minigames" HorizontalAlignment="Left" Margin="29,99,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="button" Content="Extract from ISO" HorizontalAlignment="Left" Margin="19,171,0,0" VerticalAlignment="Top" Width="109" Height="32" Click="Button_Click"/>
-        <Button x:Name="button2" Content="Import to ISO" HorizontalAlignment="Left" Margin="19,208,0,0" VerticalAlignment="Top" Width="109" Height="34" Click="Button2_Click"/>
+        <Button x:Name="button1" Content="Randomise" HorizontalAlignment="Left" Margin="86,195,0,0" VerticalAlignment="Top" Width="75" Click="Button1_Click"/>
+        <CheckBox x:Name="checkBox" Content="Tracks" HorizontalAlignment="Left" Margin="77,95,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="checkBox1" Content="Hubs" HorizontalAlignment="Left" Margin="77,115,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="checkBox2" Content="Unlocks" HorizontalAlignment="Left" Margin="77,135,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="checkBox3" Content="NPC Coords" HorizontalAlignment="Left" Margin="77,155,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="checkBox4" Content="Minigames" HorizontalAlignment="Left" Margin="77,175,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="button" Content="Extract from ISO" HorizontalAlignment="Left" Margin="66,26,0,0" VerticalAlignment="Top" Width="109" Height="32" Click="Button_Click"/>
+        <Button x:Name="button2" Content="Import to ISO" HorizontalAlignment="Left" Margin="66,247,0,0" VerticalAlignment="Top" Width="109" Height="34" Click="Button2_Click"/>
 
     </Grid>
 </Window>

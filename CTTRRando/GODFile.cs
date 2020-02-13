@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CTTRRando
 {
-    class ObjectiveFile
+    public class GODFile
     {
         public string path;
         public int start;
@@ -15,7 +15,7 @@ namespace CTTRRando
         public string[] contentString;
         public byte[] contentByte;
 
-        public ObjectiveFile(string path, int start, int length)
+        public GODFile(string path, int start, int length)
         {
             this.start = start;
             this.length = length;
