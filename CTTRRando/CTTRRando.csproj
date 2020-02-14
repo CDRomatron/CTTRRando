@@ -58,13 +58,9 @@
     <Compile Include="Elements\Courses.cs" />
     <Compile Include="Elements\Hubs.cs" />
     <Compile Include="Elements\Minigames.cs" />
-    <Compile Include="Elements\NPCCoords0.cs" />
-    <Compile Include="Elements\NPCCoords1.cs" />
-    <Compile Include="Elements\NPCCoords2.cs" />
-    <Compile Include="Elements\NPCCoords3.cs" />
-    <Compile Include="Elements\NPCCoords5.cs" />
-    <Compile Include="Elements\NPCCoords6.cs" />
+    <Compile Include="Elements\NPCCoords.cs" />
     <Compile Include="Elements\Files.cs" />
+    <Compile Include="Elements\NPCMind.cs" />
     <Compile Include="Elements\Unlocks.cs" />
     <Compile Include="RCFFile.cs" />
     <Compile Include="Replacer.cs" />

@@ -11,6 +11,11 @@ namespace CTTRRando.ISO
     {
         public static void Run(string oldfile, string newfile)
         {
+            if(File.Exists(newfile))
+            {
+                File.Delete(newfile);
+            }
+
             //write rcf files
             File.Copy(oldfile, newfile);
 

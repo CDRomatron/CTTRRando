@@ -91,5 +91,126 @@ namespace CTTRRando
             return newgeneric;
 
         }
+
+        public static byte[] ReplaceInstancesRandom(GODFile file, List<string> replaceWith, List<string> replacing)
+        {
+            string[] generic = file.contentString;
+
+            /*for (int i = 0; i < replaceWith.Count; i++)
+            {
+                Console.WriteLine(replacing[i] + " --> " + replaceWith[i]);
+            }*/
+
+            string output = "";
+
+            for (int i = 0; i < generic.Length; i++)
+            {
+                bool flag = true;
+                for (int j = 0; j < replacing.Count; j++)
+                {
+
+                    if (generic[i] == replacing[j] && flag)
+                    {
+                        int r = ThreadSafeRandom.ThisThreadsRandom.Next(0, replaceWith.Count);
+                        generic[i] = replaceWith[r];
+                        flag = false;
+                    }
+                }
+
+                if (i < generic.Length)
+                {
+                    output = output + generic[i] + '\n';
+                }
+            }
+
+            if (replaceWith[0] == "DELETEME")
+            {
+                List<string> listgen = new List<string>(generic);
+                List<string> newlist = new List<string>();
+                for (int i = 0; i < listgen.Count; i++)
+                {
+                    if (listgen[i] != "DELETEME")
+                    {
+                        newlist.Add(listgen[i]);
+                    }
+                }
+
+                generic = newlist.ToArray();
+                output = "";
+                for (int i = 0; i < generic.Length; i++)
+                {
+                    output = output + generic[i] + '\n';
+                }
+            }
+
+            byte[] newgeneric = Encoding.UTF8.GetBytes(output);
+
+            file.contentByte = newgeneric;
+            file.reload(file.path + ".new");
+
+            return newgeneric;
+
+        }
+
+        public static byte[] ReplaceInstancesSetRandom(GODFile file, List<string> replaceWith, List<string> replacing)
+        {
+            string[] generic = file.contentString;
+
+            /*for (int i = 0; i < replaceWith.Count; i++)
+            {
+                Console.WriteLine(replacing[i] + " --> " + replaceWith[i]);
+            }*/
+
+            string output = "";
+
+            for (int i = 0; i < generic.Length; i++)
+            {
+                bool flag = true;
+                for (int j = 0; j < replacing.Count; j++)
+                {
+
+                    if (generic[i] == replacing[j] && flag)
+                    {
+                        int r = ThreadSafeRandom.ThisThreadsRandom.Next(0, replaceWith.Count);
+                        generic[i] = replaceWith[r];
+                        flag = false;
+                        replaceWith.RemoveAt(r);
+                    }
+                }
+
+                if (i < generic.Length)
+                {
+                    output = output + generic[i] + '\n';
+                }
+            }
+
+            if (replaceWith[0] == "DELETEME")
+            {
+                List<string> listgen = new List<string>(generic);
+                List<string> newlist = new List<string>();
+                for (int i = 0; i < listgen.Count; i++)
+                {
+                    if (listgen[i] != "DELETEME")
+                    {
+                        newlist.Add(listgen[i]);
+                    }
+                }
+
+                generic = newlist.ToArray();
+                output = "";
+                for (int i = 0; i < generic.Length; i++)
+                {
+                    output = output + generic[i] + '\n';
+                }
+            }
+
+            byte[] newgeneric = Encoding.UTF8.GetBytes(output);
+
+            file.contentByte = newgeneric;
+            file.reload(file.path + ".new");
+
+            return newgeneric;
+
+        }
     }
 }

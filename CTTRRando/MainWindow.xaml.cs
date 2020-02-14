@@ -49,17 +49,17 @@ namespace CTTRRando
 
             if(checkBox3.IsChecked == true)
             {
-                NPCCoords0.Shuffle();
-                NPCCoords1.Shuffle();
-                NPCCoords2.Shuffle();
-                NPCCoords3.Shuffle();
-                NPCCoords5.Shuffle();
-                NPCCoords6.Shuffle();
+                NPCCoords.Shuffle();
             }
 
             if(checkBox4.IsChecked == true)
             {
                 Minigames.Shuffle();
+            }
+
+            if(checkBox5.IsChecked == true)
+            {
+                NPCMind.Shuffle();
             }
 
             string[] delete = Directory.GetFiles(Directory.GetCurrentDirectory(), "*.new");
@@ -74,14 +74,47 @@ namespace CTTRRando
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            ISOExtractor.Run("Crash Tag Team Racing.iso");
-            MessageBox.Show("Done!");
+            OpenFileDialog dlg = new OpenFileDialog();
+
+            dlg.DefaultExt = ".iso";
+            dlg.Filter = "Gamecube ISO Files (*.iso)|*.iso";
+            dlg.Title = "Select an unmodified copy of Crash Tag Team Racing (NTSC)";
+
+            Nullable<bool> result = dlg.ShowDialog();
+
+            if(result == true)
+            {
+                ISOExtractor.Run(dlg.FileName);
+                MessageBox.Show("Done!");
+            }
         }
 
         private void Button2_Click(object sender, RoutedEventArgs e)
         {
-            ISOWriter.Run("Crash Tag Team Racing.iso", "Crash Tag Team Rando.iso");
-            MessageBox.Show("Done!");
+            OpenFileDialog ofd = new OpenFileDialog();
+
+            ofd.DefaultExt = ".iso";
+            ofd.Filter = "Gamecube ISO Files (*.iso)|*.iso";
+            ofd.Title = "Select an unmodified copy of Crash Tag Team Racing (NTSC)";
+
+            Nullable<bool> result = ofd.ShowDialog();
+
+            if(result == true)
+            {
+                SaveFileDialog sfd = new SaveFileDialog();
+
+                sfd.DefaultExt = ".iso";
+                sfd.Filter = "Gamecube ISO Files (*.iso)|*.iso";
+                sfd.Title = "Save new randomised ISO";
+
+                Nullable<bool> result2 = sfd.ShowDialog();
+
+                if(result2 == true)
+                {
+                    ISOWriter.Run(ofd.FileName, sfd.FileName);
+                    MessageBox.Show("Done!");
+                }
+            }
         }
     }
 
