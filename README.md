@@ -16,6 +16,7 @@ To run this softare:
 Current features:
 * **NEW** - Reward shuffling (crystals & cars)
 * **NEW** - NPC hub AI randomisation
+* **NEW** - Logic for hub shuffling 
 * Race unlock shuffling
 * Minigame shuffling
 * Hub enterence shuffling
@@ -25,7 +26,6 @@ Current features:
 
 Planned features:
 * A "set seed" mode for races.
-* A logic "All levels mode" which always ends with AL.
 * Movie shuffling
 * SFX shuffling
 * Music shuffling
