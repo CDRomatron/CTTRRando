@@ -8,15 +8,16 @@
         Title="MainWindow" Height="429.155" Width="254.36">
     <Grid>
 
-        <Button x:Name="button1" Content="Randomise" HorizontalAlignment="Left" Margin="86,213,0,0" VerticalAlignment="Top" Width="75" Click="Button1_Click"/>
-        <CheckBox x:Name="checkBox" Content="Tracks" HorizontalAlignment="Left" Margin="77,95,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="checkBox1" Content="Hubs" HorizontalAlignment="Left" Margin="77,115,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="checkBox2" Content="Unlocks" HorizontalAlignment="Left" Margin="77,135,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="checkBox3" Content="NPC Coords" HorizontalAlignment="Left" Margin="77,155,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="checkBox4" Content="Minigames" HorizontalAlignment="Left" Margin="77,175,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="button" Content="Extract from ISO" HorizontalAlignment="Left" Margin="66,26,0,0" VerticalAlignment="Top" Width="109" Height="32" Click="Button_Click"/>
-        <Button x:Name="button2" Content="Import to ISO" HorizontalAlignment="Left" Margin="66,247,0,0" VerticalAlignment="Top" Width="109" Height="34" Click="Button2_Click"/>
-        <CheckBox x:Name="checkBox5" Content="NPC Mind" HorizontalAlignment="Left" Margin="77,193,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="button1" Content="Randomise" HorizontalAlignment="Left" Margin="86,250,0,0" VerticalAlignment="Top" Width="75" Click="Button1_Click" ToolTip=""/>
+        <CheckBox x:Name="checkBox" Content="Tracks" HorizontalAlignment="Left" Margin="77,95,0,0" VerticalAlignment="Top" ToolTip="Changes which gates unlock each track."/>
+        <CheckBox x:Name="checkBox1" Content="Hubs" HorizontalAlignment="Left" Margin="77,115,0,0" VerticalAlignment="Top" ToolTip="Changes which hub enterences lead to which hubs. Does not guarentee ability to visit all hubs."/>
+        <CheckBox x:Name="checkBox2" Content="Rewards" HorizontalAlignment="Left" Margin="77,135,0,0" VerticalAlignment="Top" ToolTip="Shuffles all mission rewards (crystals &amp; cars)."/>
+        <CheckBox x:Name="checkBox3" Content="NPC Coords" HorizontalAlignment="Left" Margin="77,155,0,0" VerticalAlignment="Top" ToolTip="Shuffles NPC positions in the hub."/>
+        <CheckBox x:Name="checkBox4" Content="Minigames" HorizontalAlignment="Left" Margin="77,175,0,0" VerticalAlignment="Top" ToolTip="Changes which park workers have which minigames."/>
+        <Button x:Name="button" Content="Extract from ISO" HorizontalAlignment="Left" Margin="66,26,0,0" VerticalAlignment="Top" Width="109" Height="32" Click="Button_Click" ToolTip="Run this first, select an unmodified version of CTTR GC NTSC"/>
+        <Button x:Name="button2" Content="Import to ISO" HorizontalAlignment="Left" Margin="66,284,0,0" VerticalAlignment="Top" Width="109" Height="34" Click="Button2_Click" ToolTip="First, choose an unmodified copy, then save your new randomised game."/>
+        <CheckBox x:Name="checkBox5" Content="NPC Mind" HorizontalAlignment="Left" Margin="77,193,0,0" VerticalAlignment="Top" ToolTip="Changes NPCs movement in hub areas (static/moving)."/>
+        <CheckBox x:Name="checkBox6" Content="Unlocks" HorizontalAlignment="Left" Margin="77,213,0,0" VerticalAlignment="Top" ToolTip="Shuffles starting cars and car unlocks (not recommended with Rewards)."/>
 
     </Grid>
 </Window>

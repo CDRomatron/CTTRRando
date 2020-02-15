@@ -44,7 +44,7 @@ namespace CTTRRando
 
             if(checkBox2.IsChecked == true)
             {
-                Unlocks.Shuffle();
+                Rewards.Shuffle();
             }
 
             if(checkBox3.IsChecked == true)
@@ -60,6 +60,11 @@ namespace CTTRRando
             if(checkBox5.IsChecked == true)
             {
                 NPCMind.Shuffle();
+            }
+
+            if(checkBox6.IsChecked == true)
+            {
+                Unlocks.Shuffle();
             }
 
             string[] delete = Directory.GetFiles(Directory.GetCurrentDirectory(), "*.new");

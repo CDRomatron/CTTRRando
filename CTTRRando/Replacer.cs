@@ -171,34 +171,13 @@ namespace CTTRRando
 
                     if (generic[i] == replacing[j] && flag)
                     {
-                        int r = ThreadSafeRandom.ThisThreadsRandom.Next(0, replaceWith.Count);
-                        generic[i] = replaceWith[r];
+                        generic[i] = replaceWith[0];
                         flag = false;
-                        replaceWith.RemoveAt(r);
+                        replaceWith.RemoveAt(0);
                     }
                 }
 
                 if (i < generic.Length)
-                {
-                    output = output + generic[i] + '\n';
-                }
-            }
-
-            if (replaceWith[0] == "DELETEME")
-            {
-                List<string> listgen = new List<string>(generic);
-                List<string> newlist = new List<string>();
-                for (int i = 0; i < listgen.Count; i++)
-                {
-                    if (listgen[i] != "DELETEME")
-                    {
-                        newlist.Add(listgen[i]);
-                    }
-                }
-
-                generic = newlist.ToArray();
-                output = "";
-                for (int i = 0; i < generic.Length; i++)
                 {
                     output = output + generic[i] + '\n';
                 }

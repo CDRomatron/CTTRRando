@@ -116,6 +116,7 @@ namespace CTTRRando.Elements
             List<string> npcmindlines = new List<string>(ExportList());
 
             List<string> npcmindlines5 = new List<string>(ExportList5());
+            npcmindlines5.Shuffle();
 
 
             Replacer.ReplaceRCF("onfoot.rcf", Files.onfoot[0].start, Replacer.ReplaceInstancesRandom(Files.onfoot[0], npcminds, npcmindlines), Files.onfoot[0].length);

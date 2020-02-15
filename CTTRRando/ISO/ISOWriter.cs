@@ -27,7 +27,7 @@ namespace CTTRRando.ISO
             byte[] onfoot5 = File.ReadAllBytes("onfoot5.rcf");
             byte[] onfoot6 = File.ReadAllBytes("onfoot6.rcf");
 
-            using (Stream stream = File.Open("Crash Tag Team Rando.iso", FileMode.Open))
+            using (Stream stream = File.Open(newfile, FileMode.Open))
             {
                 stream.Position = Convert.ToInt32(0x1ADB882C);
                 stream.Write(common, 0, common.Length);

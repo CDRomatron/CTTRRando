@@ -61,6 +61,7 @@
     <Compile Include="Elements\NPCCoords.cs" />
     <Compile Include="Elements\Files.cs" />
     <Compile Include="Elements\NPCMind.cs" />
+    <Compile Include="Elements\Rewards.cs" />
     <Compile Include="Elements\Unlocks.cs" />
     <Compile Include="RCFFile.cs" />
     <Compile Include="Replacer.cs" />
