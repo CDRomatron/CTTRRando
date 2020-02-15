@@ -14,6 +14,8 @@ To run this softare:
 
 
 Current features:
+* **NEW** - Reward shuffling (crystals & cars)
+* **NEW** - NPC hub AI randomisation
 * Race unlock shuffling
 * Minigame shuffling
 * Hub enterence shuffling
