@@ -18,6 +18,7 @@
         <Button x:Name="button2" Content="Import to ISO" HorizontalAlignment="Left" Margin="66,284,0,0" VerticalAlignment="Top" Width="109" Height="34" Click="Button2_Click" ToolTip="First, choose an unmodified copy, then save your new randomised game."/>
         <CheckBox x:Name="checkBox5" Content="NPC Mind" HorizontalAlignment="Left" Margin="77,193,0,0" VerticalAlignment="Top" ToolTip="Changes NPCs movement in hub areas (static/moving)."/>
         <CheckBox x:Name="checkBox6" Content="Unlocks" HorizontalAlignment="Left" Margin="77,213,0,0" VerticalAlignment="Top" ToolTip="Shuffles starting cars and car unlocks (not recommended with Rewards)."/>
+        <CheckBox x:Name="checkBox7" Content="Logic?" HorizontalAlignment="Left" Margin="165,115,0,0" VerticalAlignment="Top" ToolTip="Guarantees all hubs are accessible (using HEF early)"/>
 
     </Grid>
 </Window>

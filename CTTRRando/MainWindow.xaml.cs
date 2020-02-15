@@ -39,7 +39,7 @@ namespace CTTRRando
 
             if(checkBox1.IsChecked == true)
             {
-                Hubs.Shuffle();
+                Hubs.Shuffle(checkBox7.IsChecked ?? false);
             }
 
             if(checkBox2.IsChecked == true)
