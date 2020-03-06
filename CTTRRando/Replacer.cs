@@ -111,7 +111,7 @@ namespace CTTRRando
 
                     if (generic[i] == replacing[j] && flag)
                     {
-                        int r = ThreadSafeRandom.ThisThreadsRandom.Next(0, replaceWith.Count);
+                        int r = GlobalRandom.rnd.Next(0, replaceWith.Count);
                         generic[i] = replaceWith[r];
                         flag = false;
                     }

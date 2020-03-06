@@ -17,6 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using CTTRRando.Elements;
 using CTTRRando.ISO;
+using System.Text.RegularExpressions;
 
 namespace CTTRRando
 {
@@ -30,8 +31,19 @@ namespace CTTRRando
             InitializeComponent();
         }
 
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
         private void Button1_Click(object sender, RoutedEventArgs e)
         {
+            if(textBox.Text != "")
+            {
+                GlobalRandom.rnd = new Random(Convert.ToInt32(textBox.Text));
+            }
+
             if(checkBox.IsChecked == true)
             {
                 Courses.Shuffle();
@@ -123,14 +135,9 @@ namespace CTTRRando
         }
     }
 
-    public static class ThreadSafeRandom
+    public static class GlobalRandom
     {
-        [ThreadStatic] private static Random Local;
-
-        public static Random ThisThreadsRandom
-        {
-            get { return Local ?? (Local = new Random(unchecked(Environment.TickCount * 31 + Thread.CurrentThread.ManagedThreadId))); }
-        }
+        public static Random rnd = new Random();
     }
 
     static class MyExtensions
@@ -141,7 +148,7 @@ namespace CTTRRando
             while (n > 1)
             {
                 n--;
-                int k = ThreadSafeRandom.ThisThreadsRandom.Next(n + 1);
+                int k = GlobalRandom.rnd.Next(n + 1);
                 T value = list[k];
                 list[k] = list[n];
                 list[n] = value;
